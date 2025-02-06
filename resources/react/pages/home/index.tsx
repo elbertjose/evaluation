@@ -20,8 +20,6 @@ const HomePage: React.FC = () => {
       }
     }
 
-    console.log(auth)
-
     return (
         <div className="flex flex-col text-center ">
             <h1 className="text-4xl font-bold mb-4">Bienvenido a la Gestión de Usuarios</h1>

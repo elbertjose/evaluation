@@ -9,9 +9,13 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @group Gestión de Usuarios
+ *
+ * Endpoints para administrar usuarios en el sistema.
+ */
 class UserController extends Controller
 {
-
     use ApiResponse;
 
     protected $userRepository;
@@ -22,7 +26,21 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar todos los usuarios
+     * Obtener todos los usuarios
+     *
+     * Retorna una lista de todos los usuarios registrados en el sistema.
+     *
+     * @response 200 {
+     *   "status": "success",
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "name": "John Doe",
+     *       "email": "johndoe@example.com",
+     *       "created_at": "2024-02-06T12:00:00Z"
+     *     }
+     *   ]
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -33,7 +51,26 @@ class UserController extends Controller
     }
 
     /**
-     * Mostrar un usuario específico
+     * Obtener un usuario por ID
+     *
+     * Devuelve la información de un usuario específico.
+     *
+     * @urlParam id integer required El ID del usuario. Ejemplo: 1
+     *
+     * @response 200 {
+     *   "status": "success",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "johndoe@example.com",
+     *     "created_at": "2024-02-06T12:00:00Z"
+     *   }
+     * }
+     *
+     * @response 404 {
+     *   "status": "error",
+     *   "message": "User not found"
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -50,6 +87,23 @@ class UserController extends Controller
     /**
      * Crear un nuevo usuario
      *
+     * Crea un usuario con los datos proporcionados.
+     *
+     * @bodyParam name string required El nombre del usuario. Ejemplo: John Doe
+     * @bodyParam email string required El correo del usuario. Ejemplo: johndoe@example.com
+     * @bodyParam password string required La contraseña del usuario. Ejemplo: secret123
+     *
+     * @response 201 {
+     *   "status": "success",
+     *   "message": "User created successfully",
+     *   "data": {
+     *     "id": 2,
+     *     "name": "John Doe",
+     *     "email": "johndoe@example.com",
+     *     "created_at": "2024-02-06T12:00:00Z"
+     *   }
+     * }
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateRequest $request)
@@ -64,13 +118,30 @@ class UserController extends Controller
     }
 
     /**
-     * Actualizar un usuario existente
+     * Actualizar un usuario
+     *
+     * Modifica la información de un usuario existente.
+     *
+     * @urlParam id integer required El ID del usuario a actualizar. Ejemplo: 1
+     * @bodyParam name string El nuevo nombre del usuario. Ejemplo: Jane Doe
+     * @bodyParam email string El nuevo correo del usuario. Ejemplo: janedoe@example.com
+     * @bodyParam password string La nueva contraseña del usuario. (Opcional) Ejemplo: newpassword123
+     *
+     * @response 200 {
+     *   "status": "success",
+     *   "message": "User updated successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "Jane Doe",
+     *     "email": "janedoe@example.com",
+     *     "updated_at": "2024-02-06T12:30:00Z"
+     *   }
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateRequest $request, $id)
     {
-
         $userData = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -85,9 +156,18 @@ class UserController extends Controller
         return $this->success($user, 'User updated successfully');
     }
 
-
     /**
      * Eliminar un usuario
+     *
+     * Elimina un usuario existente del sistema.
+     *
+     * @urlParam id integer required El ID del usuario a eliminar. Ejemplo: 1
+     *
+     * @response 200 {
+     *   "status": "success",
+     *   "message": "User deleted successfully"
+     *   "data" => {}
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */
