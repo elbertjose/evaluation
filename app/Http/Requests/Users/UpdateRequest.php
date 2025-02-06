@@ -16,7 +16,6 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // Si deseas cambiar esto a 'true' para permitir la autorización
         return true; // Cambiar a 'true' si quieres permitir todas las solicitudes
     }
 
