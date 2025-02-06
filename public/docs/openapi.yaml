@@ -1,0 +1,354 @@
+openapi: 3.0.3
+info:
+  title: Evaluation
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://evaluation.local'
+paths:
+  /api/auth/signin:
+    post:
+      summary: 'Iniciar sesión de usuario'
+      operationId: iniciarSesinDeUsuario
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: 'Credenciales válidas'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Login successful'
+                  data:
+                    id: 1
+                    name: 'Admin User'
+                    email: admin@example.com
+                    access_token: eyJ0eXAiOiJKV1QiLCJh...
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Login successful'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Admin User'
+                      email:
+                        type: string
+                        example: admin@example.com
+                      access_token:
+                        type: string
+                        example: eyJ0eXAiOiJKV1QiLCJh...
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'El correo del usuario.'
+                  example: vince54@example.net
+                  nullable: false
+                password:
+                  type: string
+                  description: 'La contraseña del usuario.'
+                  example: '#H!3]kmj81CtN/'
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
+  /api/users:
+    get:
+      summary: 'Obtener todos los usuarios'
+      operationId: obtenerTodosLosUsuarios
+      description: 'Retorna una lista de todos los usuarios registrados en el sistema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    -
+                      id: 1
+                      name: 'John Doe'
+                      email: johndoe@example.com
+                      created_at: '2024-02-06T12:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'John Doe'
+                        email: johndoe@example.com
+                        created_at: '2024-02-06T12:00:00Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'John Doe'
+                        email:
+                          type: string
+                          example: johndoe@example.com
+                        created_at:
+                          type: string
+                          example: '2024-02-06T12:00:00Z'
+      tags:
+        - 'Gestión de Usuarios'
+      security: []
+    post:
+      summary: 'Crear un nuevo usuario'
+      operationId: crearUnNuevoUsuario
+      description: 'Crea un usuario con los datos proporcionados.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User created successfully'
+                  data:
+                    id: 2
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                    created_at: '2024-02-06T12:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User created successfully'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+                      created_at:
+                        type: string
+                        example: '2024-02-06T12:00:00Z'
+      tags:
+        - 'Gestión de Usuarios'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nombre del usuario. Ejemplo: John Doe'
+                  example: laboriosam
+                  nullable: false
+                email:
+                  type: string
+                  description: 'El correo del usuario. Ejemplo: johndoe@example.com'
+                  example: ricky14@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'La contraseña del usuario. Ejemplo: secret123'
+                  example: '4eZ]Mw"a'
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+      security: []
+  '/api/users/{id}':
+    get:
+      summary: 'Obtener un usuario por ID'
+      operationId: obtenerUnUsuarioPorID
+      description: 'Devuelve la información de un usuario específico.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                    created_at: '2024-02-06T12:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+                      created_at:
+                        type: string
+                        example: '2024-02-06T12:00:00Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'User not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'User not found'
+      tags:
+        - 'Gestión de Usuarios'
+      security: []
+    put:
+      summary: 'Actualizar un usuario'
+      operationId: actualizarUnUsuario
+      description: 'Modifica la información de un usuario existente.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User updated successfully'
+                  data:
+                    id: 1
+                    name: 'Jane Doe'
+                    email: janedoe@example.com
+                    updated_at: '2024-02-06T12:30:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User updated successfully'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Jane Doe'
+                      email:
+                        type: string
+                        example: janedoe@example.com
+                      updated_at:
+                        type: string
+                        example: '2024-02-06T12:30:00Z'
+      tags:
+        - 'Gestión de Usuarios'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'El nuevo nombre del usuario. Ejemplo: Jane Doe'
+                  example: voluptatibus
+                  nullable: false
+                email:
+                  type: string
+                  description: 'El nuevo correo del usuario. Ejemplo: janedoe@example.com'
+                  example: xjohnson@example.org
+                  nullable: false
+                password:
+                  type: string
+                  description: 'La nueva contraseña del usuario. (Opcional) Ejemplo: newpassword123'
+                  example: '!Z4fuJ3Ak96%nEZzf*?'
+                  nullable: true
+      security: []
+    delete:
+      summary: 'Eliminar un usuario'
+      operationId: eliminarUnUsuario
+      description: 'Elimina un usuario existente del sistema.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"User deleted successfully\"\n  \"data\" => {}\n}"
+      tags:
+        - 'Gestión de Usuarios'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        example: 12
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Autenticación
+    description: ''
+  -
+    name: 'Gestión de Usuarios'
+    description: "\nEndpoints para administrar usuarios en el sistema."

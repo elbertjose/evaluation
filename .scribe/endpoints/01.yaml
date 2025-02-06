@@ -1,0 +1,350 @@
+name: 'Gestión de Usuarios'
+description: |-
+
+  Endpoints para administrar usuarios en el sistema.
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/users
+    metadata:
+      groupName: 'Gestión de Usuarios'
+      groupDescription: |-
+
+        Endpoints para administrar usuarios en el sistema.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener todos los usuarios'
+      description: 'Retorna una lista de todos los usuarios registrados en el sistema.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": [
+              {
+                "id": 1,
+                "name": "John Doe",
+                "email": "johndoe@example.com",
+                "created_at": "2024-02-06T12:00:00Z"
+              }
+            ]
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/users
+    metadata:
+      groupName: 'Gestión de Usuarios'
+      groupDescription: |-
+
+        Endpoints para administrar usuarios en el sistema.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Crear un nuevo usuario'
+      description: 'Crea un usuario con los datos proporcionados.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'El nombre del usuario. Ejemplo: John Doe'
+        required: true
+        example: laboriosam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'El correo del usuario. Ejemplo: johndoe@example.com'
+        required: true
+        example: ricky14@example.org
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'La contraseña del usuario. Ejemplo: secret123'
+        required: true
+        example: '4eZ]Mw"a'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: laboriosam
+      email: ricky14@example.org
+      password: '4eZ]Mw"a'
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "User created successfully",
+            "data": {
+              "id": 2,
+              "name": "John Doe",
+              "email": "johndoe@example.com",
+              "created_at": "2024-02-06T12:00:00Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/users/{id}'
+    metadata:
+      groupName: 'Gestión de Usuarios'
+      groupDescription: |-
+
+        Endpoints para administrar usuarios en el sistema.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Obtener un usuario por ID'
+      description: 'Devuelve la información de un usuario específico.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'El ID del usuario. Ejemplo: 1'
+        required: true
+        example: 12
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 12
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "data": {
+              "id": 1,
+              "name": "John Doe",
+              "email": "johndoe@example.com",
+              "created_at": "2024-02-06T12:00:00Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "status": "error",
+            "message": "User not found"
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/users/{id}'
+    metadata:
+      groupName: 'Gestión de Usuarios'
+      groupDescription: |-
+
+        Endpoints para administrar usuarios en el sistema.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Actualizar un usuario'
+      description: 'Modifica la información de un usuario existente.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'El ID del usuario a actualizar. Ejemplo: 1'
+        required: true
+        example: 20
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 20
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'El nuevo nombre del usuario. Ejemplo: Jane Doe'
+        required: false
+        example: voluptatibus
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'El nuevo correo del usuario. Ejemplo: janedoe@example.com'
+        required: false
+        example: xjohnson@example.org
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'La nueva contraseña del usuario. (Opcional) Ejemplo: newpassword123'
+        required: false
+        example: '!Z4fuJ3Ak96%nEZzf*?'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: voluptatibus
+      email: xjohnson@example.org
+      password: '!Z4fuJ3Ak96%nEZzf*?'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "User updated successfully",
+            "data": {
+              "id": 1,
+              "name": "Jane Doe",
+              "email": "janedoe@example.com",
+              "updated_at": "2024-02-06T12:30:00Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/users/{id}'
+    metadata:
+      groupName: 'Gestión de Usuarios'
+      groupDescription: |-
+
+        Endpoints para administrar usuarios en el sistema.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Eliminar un usuario'
+      description: 'Elimina un usuario existente del sistema.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'El ID del usuario a eliminar. Ejemplo: 1'
+        required: true
+        example: 3
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 3
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "User deleted successfully"
+            "data" => {}
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
